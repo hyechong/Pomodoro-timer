@@ -6,7 +6,9 @@ import {
   motion
 } from 'framer-motion';
 
-const TimerBox = styled(motion.div)``
+const TimerBox = styled(motion.div)`
+  
+`
 
 const Timer = () => {
   const [timer, setTimer] = useRecoilState(timerState)
