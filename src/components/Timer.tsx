@@ -6,9 +6,49 @@ import {
   motion
 } from 'framer-motion';
 
-const TimerBox = styled(motion.div)`
-  
+const Container = styled.div`
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:2rem;
+  padding: 20px;
+  max-width: 480px;
+  margin: 0 auto;
 `
+const Title=styled.h1`
+  color:#fff;
+  font-size:35px;
+  font-weight:500;
+  text-align-center;
+`
+
+const TimerWrapper = styled.div`
+  display:flex;
+  align-items:center;
+  span{
+    font-size:70px;
+    font-weight:500;
+    color:rgba(255,255,255,0.7);
+  }
+`
+
+const TimerBox = styled(motion.div)`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:rgb(235, 64, 52);
+  border-radius:18px;
+  font-size:70px;
+  font-weight:500;
+  width:150px;
+  height:230px;
+  background-color:#fff;
+`
+const timerBoxVariants={
+  initial: {opacity:0, scale:.5, x:-10}
+}
 
 const Timer = () => {
   const [timer, setTimer] = useRecoilState(timerState)
@@ -67,19 +107,25 @@ const Timer = () => {
 
   return (
     <>
-      <h1>Pomodoro</h1>
-      <div>
-        {minutes<10?`0${minutes}`:minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-      </div>
-      <button onClick={toggleTimer}>{timer.isActive ? '⏸' : '▶️'}</button>
-      <div>
-        <p>{round}/4</p>
-        <span>ROUND</span>
-      </div>
-      <div>
-        <p>{goal}/12</p>
-        <span>GOAL</span>
-      </div>
+      <Container>
+        <Title>Pomodoro</Title>
+        <TimerWrapper>
+          <TimerBox>
+            {minutes<10?`0${minutes}`:minutes}
+          </TimerBox>
+          <span>:</span>
+          <TimerBox>{seconds < 10 ? `0${seconds}` : seconds}</TimerBox>
+        </TimerWrapper>
+        <button onClick={toggleTimer}>{timer.isActive ? '⏸' : '▶️'}</button>
+        <div>
+          <p>{round}/4</p>
+          <span>ROUND</span>
+        </div>
+        <div>
+          <p>{goal}/12</p>
+          <span>GOAL</span>
+        </div>
+      </Container>
     </>
   )
 }
